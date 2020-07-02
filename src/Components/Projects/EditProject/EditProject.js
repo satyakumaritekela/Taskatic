@@ -21,7 +21,7 @@ const EditProject = ({ dismiss }) => {
         dismiss();
       });
     }
-  }, [isLoading]);
+  }, [dismiss, isLoading]);
 
   function request() {
     return new Promise((resolve) => setTimeout(resolve, 2000));
@@ -97,7 +97,10 @@ const EditProject = ({ dismiss }) => {
             </div>
           </div>
           <div className="buttons">
-            <Button disabled={isLoading} type="submit" disabled={buttonDisable}>
+            <Button 
+              disabled={isLoading || buttonDisable} 
+              type="submit" 
+            >
               {isLoading ? "Save Details...." : "Save Details"}
             </Button>
             <Button onClick={dismiss}>Cancel</Button>

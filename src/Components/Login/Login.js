@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import SocialMedia from "../SignUp/SocialMedia";
 import userContext from "../../Context/userContext";
-import { ReactComponent as CloseIcon } from "../../icons/close.svg";
 import { withRouter } from "react-router-dom";
 
 import {
@@ -18,11 +17,11 @@ const Login = ({ history, loginShow }) => {
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState(" ");
 
-  const { user, setUser } = useContext(userContext);
+  const {setUser } = useContext(userContext);
 
   useEffect(() => {
     setUser("");
-  }, []);
+  }, [setUser]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -37,10 +36,9 @@ const Login = ({ history, loginShow }) => {
   };
 
   const validEmailRegex = RegExp(
-    /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/
+    /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/
   );
 
-  const validPasswordRegex = RegExp(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/);
 
   const validateEmailForm = () => {
     if (email.length === 0) {
@@ -111,7 +109,9 @@ const Login = ({ history, loginShow }) => {
           <br></br>
           <br></br>
           <FormGroup>
-            <a href="#">Forgot Password?</a>
+            <Button color="primary">
+              Forgot Password?
+            </Button>
           </FormGroup>
         </form>
         <br></br>
@@ -122,7 +122,7 @@ const Login = ({ history, loginShow }) => {
           </div>
         </div>
         <p className="SignUpLink">
-          Dont have an account? <a href="#">Sign Up</a>
+          Don't have an account? <Button color="primary">Sign Up</Button>
         </p>
       </div>
     </div>

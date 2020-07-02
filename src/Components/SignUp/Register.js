@@ -38,7 +38,7 @@ const Register = ({ history, registerShow }) => {
   };
 
   const validEmailRegex = RegExp(
-    /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$/
+    /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{1,})+$/
   );
   const validateEmailForm = () => {
     debugger;

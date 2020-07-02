@@ -17,10 +17,10 @@ const ForgotPassword = ({ history }) => {
         history.push("/login");
       });
     }
-  }, [isLoading]);
+  }, [history, isLoading]);
 
   const validEmailRegex = RegExp(
-    /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/
+    /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/
   );
 
   const validate = (values) => {
@@ -78,10 +78,9 @@ const ForgotPassword = ({ history }) => {
             <div className="buttons">
               <Button
                 variant="primary"
-                disabled={isLoading}
+                disabled={isLoading || buttonDisable}
                 type="submit"
                 block
-                disabled={buttonDisable}
               >
                 {isLoading ? "SUBMIT...." : "SUBMIT"}
               </Button>

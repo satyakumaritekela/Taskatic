@@ -3,7 +3,7 @@ import { Form } from "react-final-form";
 import "./AddUser.scss";
 import { Button } from "react-bootstrap";
 import { Grid } from "@material-ui/core";
-import { TextField, Autocomplete } from "mui-rff";
+import { Autocomplete } from "mui-rff";
 import { ReactComponent as CloseIcon } from "../../icons/close.svg";
 
 const AddUser = ({ dismiss }) => {
@@ -18,7 +18,7 @@ const AddUser = ({ dismiss }) => {
         dismiss();
       });
     }
-  }, [isLoading]);
+  }, [dismiss, isLoading]);
 
   const validate = (values) => {
     const errors = {};
@@ -79,9 +79,8 @@ const AddUser = ({ dismiss }) => {
             </Grid>
             <div className="buttons">
               <Button
-                disabled={isLoading}
+                disabled={isLoading || buttonDisable}
                 type="submit"
-                disabled={buttonDisable}
               >
                 {isLoading ? "Add User...." : "Add User"}
               </Button>

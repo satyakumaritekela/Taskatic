@@ -25,7 +25,7 @@ const CreateTask = ({ dismiss }) => {
         dismiss();
       });
     }
-  }, [isLoading]);
+  }, [dismiss, isLoading]);
 
   const validate = (values) => {
     const errors = {};
@@ -174,9 +174,8 @@ const CreateTask = ({ dismiss }) => {
             </Grid>
             <div className="buttons">
               <Button
-                disabled={isLoading}
+                disabled={isLoading || buttonDisable}
                 type="submit"
-                disabled={buttonDisable}
               >
                 {isLoading ? "CreateTask...." : "CreateTask"}
               </Button>

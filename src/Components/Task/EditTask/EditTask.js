@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Form } from "react-final-form";
 import "./EditTask.scss";
 import { Button } from "react-bootstrap";
@@ -9,7 +9,7 @@ import { Comments } from "../../Comments/Comments";
 
 const EditTask = ({ dismiss }) => {
   const [isLoading, setLoading] = useState(false);
-  let buttonDisable = true;
+  // let buttonDisable = true;
   const projects = ["Project1", "Project2"];
   const issueTypes = ["Epic", "Story", "Task", "Bug"];
   const priorityTypes = ["Highest", "High", "Medium", "Low", "Lowest"];
@@ -22,7 +22,7 @@ const EditTask = ({ dismiss }) => {
         dismiss();
       });
     }
-  }, [isLoading]);
+  }, [dismiss, isLoading]);
 
   const validate = (values) => {
     const errors = {};
@@ -42,7 +42,7 @@ const EditTask = ({ dismiss }) => {
       errors.assigneeName = "Required";
     }
 
-    buttonDisable = Object.keys(errors).length ? true : false;
+    // buttonDisable = Object.keys(errors).length ? true : false;
     return errors;
   };
 
@@ -166,7 +166,7 @@ const EditTask = ({ dismiss }) => {
               <Button
                 disabled={isLoading}
                 type="submit"
-                disabled={buttonDisable}
+                // disabled={buttonDisable}
               >
                 {isLoading ? "Edit Issue...." : "Edit Issue"}
               </Button>

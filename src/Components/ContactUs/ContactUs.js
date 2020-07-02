@@ -13,7 +13,7 @@ const ContactUs = () => {
     const [error, setError] = useState({ isFormOkay: false, fullName: "", email: "" })
     
     const validEmailRegex = RegExp(
-        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/
+        /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/
     );
 
     const onSubmit = e => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Form } from "react-final-form";
 import { Button } from "react-bootstrap";
 import { Grid } from "@material-ui/core";
@@ -17,7 +17,7 @@ const CreateProject = ({ dismiss }) => {
         dismiss();
       });
     }
-  }, [isLoading]);
+  }, [dismiss, isLoading]);
 
   const validate = (values) => {
     const errors = {};
@@ -116,9 +116,8 @@ const CreateProject = ({ dismiss }) => {
             </Grid>
             <div className="buttons">
               <Button
-                disabled={isLoading}
+                disabled={isLoading || buttonDisable}
                 type="submit"
-                disabled={buttonDisable}
               >
                 {isLoading ? "Create Project...." : "Create Project"}
               </Button>

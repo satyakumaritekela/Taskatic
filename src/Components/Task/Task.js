@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { ReactComponent as HighIcon } from "../../icons/high.svg";
 import { ReactComponent as HighestIcon } from "../../icons/highest.svg";
 import { ReactComponent as MediumIcon } from "../../icons/medium.svg";

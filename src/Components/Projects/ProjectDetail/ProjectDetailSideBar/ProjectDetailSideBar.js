@@ -37,7 +37,7 @@ const ProjectDetailSideBar = ({ history }) => {
     window.addEventListener("resize", handleResize);
     handleResize();
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [sidebar]);
 
   return (
     <>

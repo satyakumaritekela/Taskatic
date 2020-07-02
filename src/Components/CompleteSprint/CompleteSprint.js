@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Form } from "react-final-form";
 import "./CompleteSprint.scss";
 import { Button } from "react-bootstrap";
@@ -18,7 +18,7 @@ const CompleteSprint = ({ dismiss }) => {
         dismiss();
       });
     }
-  }, [isLoading]);
+  }, [dismiss, isLoading]);
 
   const validate = (values) => {
     const errors = {};
@@ -80,9 +80,8 @@ const CompleteSprint = ({ dismiss }) => {
             </Grid>
             <div className="buttons">
               <Button
-                disabled={isLoading}
+                disabled={isLoading || buttonDisable}
                 type="submit"
-                disabled={buttonDisable}
               >
                 {isLoading ? "Complete...." : "Complete"}
               </Button>

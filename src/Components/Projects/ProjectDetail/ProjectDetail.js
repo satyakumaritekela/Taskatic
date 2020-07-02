@@ -1,6 +1,6 @@
 import React from "react";
 import ProjectDetailSideBar from "./ProjectDetailSideBar/ProjectDetailSideBar";
-import ProjectDetailMain from "./ProjectDetailMain/ProjectDetailMain";
+// import ProjectDetailMain from "./ProjectDetailMain/ProjectDetailMain";
 import "./ProjectDetail.scss";
 
 const ProjectDetail = (props) => {

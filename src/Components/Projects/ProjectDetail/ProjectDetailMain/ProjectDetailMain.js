@@ -61,9 +61,9 @@ function ProjectDetailMain() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpenEdit, setIsModalOpenEdit] = useState(false);
 
-  const handleModalOpen = () => {
-    setIsModalOpen(!isModalOpen);
-  };
+  // const handleModalOpen = () => {
+  //   setIsModalOpen(!isModalOpen);
+  // };
   const dismissable = () => {
     setIsModalOpen(false);
   };
@@ -100,7 +100,7 @@ function ProjectDetailMain() {
 
   useEffect(() => {
     setColumns(columnsData);
-  }, [tasks]);
+  }, [columnsData, tasks]);
 
   useEffect(() => {}, []);
 

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Card, Button, Row, Col, Container } from "react-bootstrap";
 import Jerry from "../../assets/jerry.jpg";
 import Lisa from "../../assets/lisa.jpg";
@@ -7,10 +7,10 @@ import userContext from "../../Context/userContext";
 import "./AboutUs.scss";
 
 const AboutUs = () => {
-  const { user, setUser } = useContext(userContext);
+  const { setUser } = useContext(userContext);
   useEffect(() => {
     setUser("");
-  }, []);
+  }, [setUser]);
   return (
     <Container fluid>
       <Row style={{ paddingTop: "30px" }}>
