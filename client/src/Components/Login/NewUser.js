@@ -1,5 +1,5 @@
 import React from "react";
-import "../Login/NewUser.css";
+import "./NewUser.css";
 const NewUser = () => {
   return (
     <div className="NewUser">

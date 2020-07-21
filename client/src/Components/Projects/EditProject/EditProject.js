@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import Editable from "../../../Components/Editable/Editable";
+import Editable from "../../Editable/Editable";
 import { ReactComponent as CloseIcon } from "../../../icons/close.svg";
 import { Button } from "react-bootstrap";
 import "./EditProject.scss";

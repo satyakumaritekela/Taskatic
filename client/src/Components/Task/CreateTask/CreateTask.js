@@ -5,7 +5,7 @@ import { Button } from "react-bootstrap";
 import { Grid } from "@material-ui/core";
 import { TextField, Autocomplete } from "mui-rff";
 import { v4 as uuid } from "uuid";
-import Task from "../../Task/Task";
+import Task from "../Task";
 import { ReactComponent as CloseIcon } from "../../../icons/close.svg";
 import tasksItemsContext from "../../../Context/tasksItemsContext";
 

@@ -6,7 +6,7 @@ import { ReactComponent as OrganizationIcon } from "../../icons/organization.svg
 import { ReactComponent as LocationIcon } from "../../icons/location.svg";
 import { ReactComponent as EmailIcon } from "../../icons/email.svg";
 import "./Profile.scss";
-import Editable from "../../Components/Editable/Editable";
+import Editable from "../Editable/Editable";
 import { Button } from "react-bootstrap";
 
 const Profile = () => {

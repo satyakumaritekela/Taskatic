@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
-import Project from "../Projects/Project/Project";
+import Project from "./Project/Project";
 import "./Projects.scss";
-import ProjectHeader from "../Projects/ProjectHeader/ProjectHeader";
+import ProjectHeader from "./ProjectHeader/ProjectHeader";
 
 const projectsList = [
   { name: "Project1", key: "Pr", type: "Classic", lead: "Harry" },

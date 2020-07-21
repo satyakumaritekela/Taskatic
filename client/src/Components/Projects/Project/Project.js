@@ -6,7 +6,7 @@ import { ReactComponent as SettingsIcon } from "../../../icons/bolt.svg";
 import { ReactComponent as NewTabIcon } from "../../../icons/newtab.svg";
 import { withRouter } from "react-router-dom";
 import Modal from "../../Modal/Modal";
-import EditProject from "./../EditProject/EditProject";
+import EditProject from "../EditProject/EditProject";
 
 const Project = (props) => {
   const { projects, history } = props;
