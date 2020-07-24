@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, componentDidMount } from "react";
 import { Router } from "react-router-dom";
 import history from "./services/history";
 import Routes from "./Routes";
@@ -8,6 +8,7 @@ import tasksItemsContext from "./Context/tasksItemsContext";
 import Task from "./Components/Task/Task";
 import * as firebase from "firebase";
 import firebaseConfig from "./firebase.config";
+import { auth } from "firebase";
 
 const task = {
   projectName: "project1",
@@ -19,11 +20,10 @@ const task = {
 
 firebase.initializeApp(firebaseConfig);
 export const AuthContext = React.createContext(null);
-
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [isNavbar, setIsNavbar] = useState(true);
-  const [user, setUser] = useState("user");
+  const [user, setUser] = useState("");
   const [tasks, setTasks] = useState([
     {
       id: "1",
@@ -31,12 +31,27 @@ function App() {
     },
   ]);
 
+  const componentDidMount = () => {
+    auth.onAuthStateChanged((userAuth) => {
+      console.log("Auth : ", userAuth);
+      setUser(userAuth);
+    });
+  };
+  function readSession() {
+    const user = window.sessionStorage.getItem(
+      `firebase:authUser:${firebaseConfig.apiKey}:[DEFAULT]`
+    );
+    if (user) setLoggedIn(true);
+  }
+  useEffect(() => {
+    readSession();
+  }, []);
   useEffect(() => {
     if (window.location.pathname === "/error") {
       setIsNavbar(false);
     }
   }, []);
-  console.log("####firebase obj ", firebase);
+
   return (
     <AuthContext.Provider value={{ isLoggedIn, setLoggedIn }}>
       <Router history={history}>

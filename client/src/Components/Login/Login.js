@@ -32,18 +32,23 @@ const Login = ({ history, loginShow }) => {
       event.preventDefault();
       firebase
         .auth()
-        .signInWithEmailAndPassword(email, password)
-        .then((res) => {
-          console.log(res);
-          if (res.user) {
-            Auth.setLoggedIn(true);
-            setUser("asd");
-            loginShow(false);
-            history.push("/home");
-          }
-        })
-        .catch((event) => {
-          setErrors(event.message);
+        .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+        .then(() => {
+          firebase
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .then((res) => {
+              console.log(res);
+              if (res.user) {
+                Auth.setLoggedIn(true);
+                setUser("asd");
+                loginShow(false);
+                history.push("/home");
+              }
+            })
+            .catch((event) => {
+              setErrors(event.message);
+            });
         });
     } else {
       validateEmailForm();
