@@ -3,6 +3,8 @@ import SocialMedia from "../SignUp/SocialMedia";
 import userContext from "../../Context/userContext";
 import { ReactComponent as CloseIcon } from "../../icons/close.svg";
 import { withRouter } from "react-router-dom";
+import * as firebase from "firebase";
+import { AuthContext } from "../../App";
 
 import {
   TextField,
@@ -17,7 +19,7 @@ const Login = ({ history, loginShow }) => {
   const [emailError, setEmailError] = useState(" ");
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState(" ");
-
+  const [error, setErrors] = useState("");
   const { user, setUser } = useContext(userContext);
 
   useEffect(() => {
@@ -27,9 +29,22 @@ const Login = ({ history, loginShow }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (emailError.length === 0 && passwordError.length === 0) {
-      setUser("asd");
-      loginShow(false);
-      history.push("/home");
+      event.preventDefault();
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then((res) => {
+          console.log(res);
+          if (res.user) {
+            Auth.setLoggedIn(true);
+            setUser("asd");
+            loginShow(false);
+            history.push("/home");
+          }
+        })
+        .catch((event) => {
+          setErrors(event.message);
+        });
     } else {
       validateEmailForm();
       validatePasswordForm();
@@ -59,7 +74,7 @@ const Login = ({ history, loginShow }) => {
       setPasswordError("");
     }
   };
-
+  const Auth = useContext(AuthContext);
   return (
     <div className="LoginHomePage">
       <div>
@@ -68,6 +83,9 @@ const Login = ({ history, loginShow }) => {
       <div className="Login row">
         <p className="Title">Log In</p>
         <form>
+          <FormHelperText id="my-helper-text">
+            <p className="ErrorText">{error}</p>
+          </FormHelperText>
           <FormGroup>
             <TextField
               id="emailInput"
@@ -111,7 +129,7 @@ const Login = ({ history, loginShow }) => {
           <br></br>
           <br></br>
           <FormGroup>
-            <a href="#">Forgot Password?</a>
+            <a href="forgotPassword">Forgot Password?</a>
           </FormGroup>
         </form>
         <br></br>

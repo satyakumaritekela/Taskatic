@@ -11,3 +11,7 @@
   padding-left: 25px;
   display: inline-block;
 }
+.SignUpError {
+  color: red;
+  font-weight: bold;
+}

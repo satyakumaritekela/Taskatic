@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { withRouter } from "react-router-dom";
+import * as firebase from "firebase";
+import { AuthContext } from "../../App";
 
 import {
   TextField,
@@ -17,6 +19,7 @@ const Register = ({ history, registerShow }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState(" ");
   const validPasswordRegex = RegExp(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/);
+  const [error, setErrors] = useState("");
 
   const validatePasswordForm = () => {
     if (password.length === 0) {
@@ -30,9 +33,11 @@ const Register = ({ history, registerShow }) => {
   const validateConfirmPasswordForm = () => {
     if (confirmPassword.length === 0) {
       setConfirmPasswordError("* Confirm password cannot be empty");
-    } else if (confirmPassword !== password) {
-      setConfirmPasswordError("* passwords doesn't match");
-    } else {
+    }
+    // else if (confirmPassword !== password) {
+    //   setConfirmPasswordError("* passwords doesn't match");
+    // }
+    else {
       setConfirmPasswordError("");
     }
   };
@@ -57,16 +62,30 @@ const Register = ({ history, registerShow }) => {
       setNameError("");
     }
   };
-  const handleSubmit = (event) => {
-    event.preventDefault();
+
+  const Auth = useContext(AuthContext);
+  const handleForm = (e) => {
     if (
       nameError.length === 0 &&
       confirmPasswordError.length === 0 &&
       emailError.length === 0 &&
       passwordError.length === 0
     ) {
-      registerShow(false);
-      history.push("/login");
+      e.preventDefault();
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then((res) => {
+          console.log(res);
+          if (res.user) {
+            Auth.setLoggedIn(true);
+            registerShow(false);
+            history.push("/login");
+          }
+        })
+        .catch((e) => {
+          setErrors(e.message);
+        });
     } else {
       validateEmailForm();
       validatePasswordForm();
@@ -77,7 +96,10 @@ const Register = ({ history, registerShow }) => {
 
   return (
     <div className="Register">
-      <form>
+      <form onSubmit={(e) => handleForm(e)}>
+        <FormHelperText id="my-helper-text">
+          <p className="ErrorText">{error}</p>
+        </FormHelperText>
         <FormGroup>
           <TextField
             id="nameInput"
@@ -150,7 +172,7 @@ const Register = ({ history, registerShow }) => {
             <p className="ErrorText">{confirmPasswordError}</p>
           </FormHelperText>
         </FormGroup>
-        <Button onClick={handleSubmit} variant="contained" color="primary">
+        <Button variant="contained" color="primary" type="submit">
           Register
         </Button>
       </form>

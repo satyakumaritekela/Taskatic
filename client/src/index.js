@@ -4,7 +4,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "./scss/index.scss";
 import "bootstrap/dist/css/bootstrap.css";
-import "react-big-calendar/lib/css/react-big-calendar.css"
+import "react-big-calendar/lib/css/react-big-calendar.css";
 
 ReactDOM.render(
   // <React.StrictMode>

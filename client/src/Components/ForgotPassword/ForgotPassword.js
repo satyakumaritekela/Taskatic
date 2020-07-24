@@ -1,13 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Form } from "react-final-form";
 import { NavLink } from "react-router-dom";
 import "../Form/Form.scss";
-import { Button } from "react-bootstrap";
 import { Grid } from "@material-ui/core";
-import { TextField } from "mui-rff";
+import * as firebase from "firebase";
+import { AuthContext } from "../../App";
 
+import {
+  TextField,
+  Button,
+  FormGroup,
+  FormHelperText,
+} from "@material-ui/core";
 const ForgotPassword = ({ history }) => {
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState(" ");
   const [isLoading, setLoading] = useState(false);
+  const [error, setErrors] = useState("");
   let buttonDisable = true;
 
   useEffect(() => {
@@ -23,79 +32,84 @@ const ForgotPassword = ({ history }) => {
     /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/
   );
 
-  const validate = (values) => {
-    const errors = {};
-    if (!values.email) {
-      errors.email = "Required";
-    } else if (!validEmailRegex.test(values.email)) {
-      errors.email = "Email is not valid!";
+  const validateEmailForm = () => {
+    if (email.length === 0) {
+      setEmailError("* email id cannot be empty");
+    } else if (!validEmailRegex.test(email)) {
+      setEmailError("* Email is not valid");
+    } else {
+      setEmailError("");
     }
-
-    buttonDisable = Object.keys(errors).length ? true : false;
-    return errors;
   };
-
-  const formFields = [
-    {
-      size: 12,
-      field: (
-        <TextField
-          type="email"
-          label="Email"
-          name="email"
-          margin="none"
-          required={true}
-          variant="outlined"
-        />
-      ),
-    },
-  ];
 
   function request() {
     return new Promise((resolve) => setTimeout(resolve, 2000));
   }
 
-  const onSubmit = () => {
-    setLoading(true);
+  const handleResetSubmit = (event) => {
+    event.preventDefault();
+    if (emailError.length === 0) {
+      event.preventDefault();
+      firebase
+        .auth()
+        .sendPasswordResetEmail(email)
+        .then((res) => {
+          console.log(res);
+          if (res.user) {
+            Auth.setLoggedIn(false);
+            history.push("/home");
+          }
+        })
+        .catch((event) => {
+          setErrors(event.message);
+        });
+    } else {
+      validateEmailForm();
+    }
   };
-
+  const Auth = useContext(AuthContext);
   return (
-    <Form
-      onSubmit={onSubmit}
-      initialValues={{
-        email: "",
-        password: "",
-      }}
-      validate={validate}
-      render={({ handleSubmit }) => (
-        <form onSubmit={handleSubmit} className="formField">
-          <Grid container alignItems="flex-start" spacing={2}>
-            {formFields.map((item, id) => (
-              <Grid item xs={item.size} key={id}>
-                {item.field}
-              </Grid>
-            ))}
-            <div className="buttons">
-              <Button
-                variant="primary"
-                disabled={isLoading}
-                type="submit"
-                block
-                disabled={buttonDisable}
-              >
-                {isLoading ? "SUBMIT...." : "SUBMIT"}
-              </Button>
-            </div>
-          </Grid>
-          <div className="message">
-            Verification link will be sent to your email address
-          </div>
-          <NavLink to="/login" className="link">
-            <p>Doesn't want to submit? Login here.</p>
-          </NavLink>
-        </form>
-      )}
-    />
+    <div class="container">
+      <form className="formField">
+        <FormHelperText id="my-helper-text">
+          <p className="ErrorText">{error}</p>
+        </FormHelperText>
+        <FormGroup>
+          <TextField
+            id="emailInput"
+            label="Email"
+            variant="outlined"
+            aria-describedby="my-helper-text"
+            type="email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setEmailError("");
+              validateEmailForm();
+            }}
+            className={emailError.length > 0 ? "errorTextField" : ""}
+          />
+          <FormHelperText id="my-helper-text">
+            <p className="ErrorText">{emailError}</p>
+          </FormHelperText>
+        </FormGroup>
+        <div className="buttons">
+          <Button
+            onClick={handleResetSubmit}
+            variant="contained"
+            color="primary"
+          >
+            Reset Password
+          </Button>
+        </div>
+        <div className="message">
+          Verification link will be sent to your email address
+        </div>
+        <NavLink to="/login" className="link">
+          <p>Doesn't want to submit? Login here.</p>
+        </NavLink>
+      </form>
+    </div>
   );
 };
 
