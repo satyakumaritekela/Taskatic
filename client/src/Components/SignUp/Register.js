@@ -76,9 +76,20 @@ const Register = ({ history, registerShow }) => {
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .then((res) => {
-          console.log(res);
+          var user = firebase.auth().currentUser;
+          user
+            .updateProfile({
+              displayName: name,
+            })
+            .then(function () {
+              alert("Sign up is successful, please login");
+            })
+            .catch(function (error) {
+              // An error happened.
+            });
+
           if (res.user) {
-            Auth.setLoggedIn(true);
+            Auth.setLoggedIn(false);
             registerShow(false);
             history.push("/login");
           }

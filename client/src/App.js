@@ -31,12 +31,6 @@ function App() {
     },
   ]);
 
-  const componentDidMount = () => {
-    auth.onAuthStateChanged((userAuth) => {
-      console.log("Auth : ", userAuth);
-      setUser(userAuth);
-    });
-  };
   function readSession() {
     const user = window.sessionStorage.getItem(
       `firebase:authUser:${firebaseConfig.apiKey}:[DEFAULT]`

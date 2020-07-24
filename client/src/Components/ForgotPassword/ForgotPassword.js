@@ -54,11 +54,9 @@ const ForgotPassword = ({ history }) => {
         .auth()
         .sendPasswordResetEmail(email)
         .then((res) => {
-          console.log(res);
-          if (res.user) {
-            Auth.setLoggedIn(false);
-            history.push("/home");
-          }
+          Auth.setLoggedIn(false);
+          history.push("/");
+          alert("Password reset link is sent!!");
         })
         .catch((event) => {
           setErrors(event.message);

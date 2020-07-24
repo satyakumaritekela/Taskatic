@@ -38,12 +38,13 @@ const Login = ({ history, loginShow }) => {
             .auth()
             .signInWithEmailAndPassword(email, password)
             .then((res) => {
-              console.log(res);
               if (res.user) {
+                var user = firebase.auth().currentUser;
                 Auth.setLoggedIn(true);
-                setUser("asd");
+                setUser(user.displayName);
                 loginShow(false);
                 history.push("/home");
+                alert("Successfully logged in");
               }
             })
             .catch((event) => {
