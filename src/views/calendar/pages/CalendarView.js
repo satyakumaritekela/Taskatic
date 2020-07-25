@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import moment from 'moment'
 import { Calendar as BigCalendar, momentLocalizer } from 'react-big-calendar'
 import { Card, Row, Col, Container } from 'react-bootstrap'
+import axios from 'axios'
 
 import CalendarToolbar from '../components/CalendarToolbar'
 import { colorScheme } from '../../../constants/defaultValues'
@@ -10,6 +11,7 @@ import dummyEvents from '../../../constants/calendarEvents'
 const CalendarView = () => {
   const [events, setEvents] = useState(dummyEvents)
   const [status, setStatus] = useState()
+  const [project, setProject] = useState()
   const [self, setSelf] = useState(false)
 
   useEffect(() => {
@@ -40,8 +42,11 @@ const CalendarView = () => {
                     self={self}
                     event={events}
                     status={status}
+                    project={project}
                     setSelf={setSelf}
                     setStatus={setStatus}
+                    setProject={setProject}
+                    projectOptions={[]}
                   />
               }}
             />

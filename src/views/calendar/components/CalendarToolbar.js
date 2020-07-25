@@ -37,7 +37,7 @@ const selectComponentStyles = () => ({
   }
 })
 
-const CalendarToolbar = ({ self, status, onNavigate, label, setSelf, setStatus }) => {
+const CalendarToolbar = ({ self, status, project, onNavigate, label, setSelf, setStatus, setProject, projectOptions }) => {
   const selectOptions = Object
     .keys(taskStatus)
     .map(value => ({ value, label: taskStatus[value], color: colorScheme[value] }))
@@ -72,15 +72,28 @@ const CalendarToolbar = ({ self, status, onNavigate, label, setSelf, setStatus }
       </Tooltip>
     </div>
     <div className="d-flex">
+      {/* Task project filter */}
+      <span>
+        <Select
+          isClearable
+          value={project}
+          placeholder="All Projects"
+          onChange={setProject}
+          styles={{ control: style => ({ width: '175px', ...style }) }}
+          options={projectOptions}
+        />
+      </span>
       {/* Task status filter */}
-      <Select
-        isClearable
-        value={status}
-        placeholder="Status"
-        onChange={setStatus}
-        styles={selectComponentStyles()}
-        options={selectOptions}
-      />
+      <span className="ml-3">
+        <Select
+          isClearable
+          value={status}
+          placeholder="Status"
+          onChange={setStatus}
+          styles={selectComponentStyles()}
+          options={selectOptions}
+        />
+      </span>
       {/* Task assignee filter (own tasks and everyone's tasks) */}
       <Tooltip placement="top" tooltip={self ? "Show Everyone's Tasks" : "Show My Tasks"}>
         <ButtonGroup toggle className="ml-3">
