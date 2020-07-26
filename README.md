@@ -1,68 +1,261 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+##Assignment 4
 
-## Available Scripts
+This assignment 4 consists of the frontend and backend development of CSCI 5709 web group project.Out of all features, in this assignment I am implementing User profile management feature. This implementation includes the front end and back end development and integration.
 
-In the project directory, you can run:
 
-### `npm start`
+@Author : # Vali Shaik
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#Email : vl216084@dal.ca
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Date: 25th July 2020
 
-### `npm test`
+##Github Link
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+https://github.com/satyakumaritekela/Taskatic
 
-### `npm run build`
+##Heroku Link
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+https://taskatic.herokuapp.com/
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+##Getting Started
 
-### `npm run eject`
+•	Clone the repository from the GitHub link provided below
+•	Go to path where package.json is located open the command prompt
+•	Install the node modules using the following command npm run dev
+•	Start the react application by using the following command npm start
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+##Prerequisites
+It requires NodeJS to be installed on the system.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+##Built with
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+•React: It is a JavaScript view library to develop frontend. It helps us to create attractive single page applications.
 
-## Learn More
+•Visual Studio code: It is a code-editor to built, debug web, and cloud-based applications.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+•Node.js: Open-source, cross-platform, java script runtime environment.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+•Express: It is a web application framework for Node.js for the development of backend, that handles all the interactions between the frontend and database ensuring a smooth transfer of data to the end user.
 
-### Code Splitting
+•MongoDb: It is a cross-platform document-oriented database program, which uses JSON like documents with optional schemas.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+•Firebase: Firebase Authentication provides backend services, easy-to-use SDKs, and ready-made UI libraries to authenticate users of our app. 
 
-### Analyzing the Bundle Size
+##Deployment
+App is deployed in heroku with automatic deploys from the github repository. On making the git commit build gets made and branch is deployed to the server
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
-### Making a Progressive Web App
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+###Front end
 
-### Advanced Configuration
+As part of implementing User management, below UI pages are designed in assignment 3 and can be found in below path of the project folder.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+#Login.js
 
-### Deployment
+The login screen is designed to allow an existing user to sign in into the application. User needs
+to authenticate by providing a valid username and password. User inputs are validated for nonempty
+checks.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+Taskatic/client/src/Components/Login
 
-### `npm run build` fails to minify
+#Register.js
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Register page in designed to allow a new user to sign up with the application. To register
+with the Taskatic application, the user needs to provide all the mandatory fields. Various
+text validations are performed over the user inputs. Once the validations are passed, an
+account is created for the given user details.
+
+Taskatic/client/src/Components/SignUp
+
+#ForgotPassword.js
+
+This page is used to reset the password of an existing user.
+
+Taskatic/client/src/Components/ForgotPassword
+
+#Profile.js
+
+By navigating to this page, the user will be able to see personal details such as email id,
+designation, address. If the user wants to change any of those details, user can edit the
+details directly and click on the ‘Save Details’ button.
+
+Taskatic/client/src/Components/Profile
+
+###Back end
+
+Below are the files developed in back end for profile management implemtation.
+
+User.js
+UserController.js
+UserRoutes.js
+
+
+
+#User Authentication
+For user management implementation, I referred to google firebase user guide and used google firebase authentication as a backend service. Firebase stores all the user's implementation. It also provides various services for SignIn ,Register, Password reset functionalities.
+
+Firebase config: Containing all Keys to connect to firebase
+
+Firebase login service : signInWithEmailAndPassword(email, password)
+Firebase Register service : createUserWithEmailAndPassword(email, password)
+Firebase Forgot password service : signInWithEmailAndPassword(email, password)
+Firebase user details service: firebase.auth().currentUser
+
+firebase.config.js
+===================
+Contains API keys, Project Id, application ID to connect to application
+
+#Profile management
+
+For mainting the user profile details, I have implemented REST API using node js. User details are stored in Mongo DB. Our application consumes these API's for maintaining and manipulating applicationuser details. For these API implementation I reused the developed code in group tutorials.
+
+Controller is a directory which contains our all of our routes Controller to navigate to different component. For mainting User profiles UserController is developed containg all the request mappings of API.
+
+UserController.js
+==================
+
+This file is responsible for making changes to the existing user or adding new user. This file has functions which responsible for fetching all users, getting new user detail, modify new user, and add new user to the database.
+
+User.js
+========
+
+User model is present in models/ folder.This file contains the model of the User entity.
+
+##API URL
+
+Find user by user name : "<path>/user/getUser/<userId>"
+
+Add user : "<path>/user/addUser"
+
+Update user : "<path>/user/modifyUser/<userId>"
+
+
+###Integration:
+
+To integrate Front end with Back end, firstly for user authentication I installed firebase sdk module by using command "npm install firebase". This downloads the SDK and backend service libraries. For every user created in google firebase, an unquie ID is generated, using this unique ID user profile details are stored in Mongo DB for the respective ID.
+
+For Login I referred google firebase guide and consumed login service.
+
+Code
+=====
+Used in Login.js 
+
+firebase
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .then((res) => {
+              if (res.user) {
+                //On successful login, fetching user properties and setting it to Context
+                firebase.auth().onAuthStateChanged(function (user) {
+                  if (user) {
+                    // User is signed in.
+                    setUser(user.displayName);
+                  } else {
+                    // No user is signed in.
+                  }
+                });
+                Auth.setLoggedIn(true);
+                loginShow(false);
+                //Displaying home page to the user
+                history.push("/home");
+              }
+            
+Register Service:
+
+Code
+=====
+Used in Register.js 
+
+firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then((res) => {
+          //Once sign up is successfull, user properties are updated
+          var user = firebase.auth().currentUser;
+          user
+            .updateProfile({
+              displayName: name,
+            })
+            .then(function () {
+              //Saving user details in DB
+              axios
+                .post("/user/addUser", {
+                  id: user.uid,
+                  userName: name,
+                  email: email,
+                  jobTitle: "Software Dev",
+                  department: "Research",
+                  organisation: "Dalhousie",
+                  country: "Canada",
+                })
+                .then((response) => {
+                  alert("Sign up is successful, please login");
+                })
+
+
+Fetch User details:
+
+Code
+=====
+Used in Profile.js
+
+firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        // User is signed in.
+        console.log("Current signed after refresh", user.uid);
+        setUserId(user.uid);
+      } else {
+        // No user is signed in.
+      }
+    });
+
+
+
+###API Calls
+
+The Id from firebase current user is mapped with user profile details and stored in DB.Below is the code used to fetch data from Mongo DB and populate on UI.
+
+Add User details
+==================
+Used in Register.js
+
+ axios
+                .post("/user/addUser", {
+                  id: user.uid,
+                  userName: name,
+                  email: email,
+                  jobTitle: "Software Dev",
+                  department: "Research",
+                  organisation: "Dalhousie",
+                  country: "Canada",
+                })
+
+
+
+Get user details
+==================
+Used in Profile.js
+
+ axios
+      .get(`/user/getUser/${userId}`)
+      .then((response) => {
+        const userData = response.data.data[0];
+        setName(userData.userName);
+        setJobTitle(userData.jobTitle);
+        setYourDepartment(userData.department);
+        setYourOrganization(userData.organisation);
+        setEmail(userData.email);
+        setYourLocation(userData.country);
+      })
+
+
+Tools Used:
+===========
+Postman tool is used to test API's developed using Node js.
+Mongo Compass tool is and Visual GUI tool used to view the data present in Mongo DB.
+
+###References
+1.Google Firebase user guide https://firebase.google.com/docs/auth/web/start
+2. Mongo Compass user guide https://www.mongodb.com/products/compass
